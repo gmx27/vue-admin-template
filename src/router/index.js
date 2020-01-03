@@ -86,18 +86,18 @@ export const constantRoutes = [
     meta: { title: '系统配置', icon: 'user' },
     children:[
       {
-        path: 'list',
+        path: 'column/list',
         name: 'ColumnList',
-        component: () => import('@/pages/systemConfig/product/List'),
+        component: () => import('@/pages/systemConfig/column/List'),
         meta: { title: '栏目管理', icon: 'user' },
-        default:1
+        
       },
       {
-        path: 'list',
+        path: 'product/list',
         name: 'ProductList',
         component: () => import('@/pages/systemConfig/product/List'),
         meta: { title: '产品管理', icon: 'user' },
-        default:2
+       
       }
     ]
   },

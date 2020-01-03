@@ -20,9 +20,7 @@
         </el-table>
         <!--表格结束-->
         <!--分页开始-->
-        <el-pagination layout="prev,pager,next"
-        :total="50">
-        </el-pagination>
+        <!-- <el-pagination layout="prev,pager,next" :total="50"></el-pagination> -->
         <!--分页结束-->
         <!--对话框-->
         <el-dialog
@@ -118,24 +116,32 @@ export default {
         },
         toDeleteHandler(id){
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
         }).then(() => {
+        let url="http://localhost:6677/waiter/deleteById?id="+id;
+        request.get(url).then((response)=>{
+          //刷新数据
+          this.loadData();
+          //提示结果
           this.$message({
-            type: 'success',
-            message: '删除成功!'+id
-          });
-        })
-        },
+          type: 'success',
+          message: response.message
+        });
+        })       
+      })     
+    },
         toUpdateHandler(row){
-            this.title="修改员工信息"
+            this.form=row
             this.visible=true;
         },
-        toAddHandler(){
-            this.title="录入员工信息"
-            this.visible=true;
-        },
+       toAddHandler(){
+      this.form={
+        type:"waiter"
+      }
+      this.visible = true;
+     },
         closeModalHandler(){
             this.visible=false;
         }
